@@ -2,14 +2,30 @@
 
     import { useTodoStore } from 'src/stores/todo-store.js'
     import TodoCard from 'src/components/TodoCard.vue'
+    import {useQuasar} from 'quasar'
 
     const todoStore = useTodoStore()
+    const $q = useQuasar()
+
+    function addTodo() {
+        todoStore.insertTodo()
+        $q.notify('Todo added')
+    }
+
+    function deleteTodo() {
+        todoStore.deleteTodo()
+        $q.notify('Todo deleted')
+    }
+
+    function updateTodo() {
+        todoStore.updateTodo()
+        $q.notify('Todo updated')
+    }
 
 </script>
 
 <template>
     <q-page padding class="bg-grey-3">
-        
         <TodoCard :title="'Todos'" :todos="todoStore.getTodos" /> 
         <TodoCard :title="'Completed'" :todos="todoStore.getCompleted" /> 
 
@@ -33,7 +49,7 @@
 
                 <q-card-actions align="right" class="bg-white">
                     <q-btn flat label="Cancel" color="black" v-close-popup />
-                    <q-btn flat label="Delete" color="red" />
+                    <q-btn flat label="Delete" color="red" @click="deleteTodo"  v-close-popup/>
                 </q-card-actions>
             </q-card>
         </q-dialog>
@@ -49,13 +65,13 @@
                 </q-toolbar>
 
                 <q-card-section>
-                    <q-input filled  label="Title"></q-input>
-                    <q-input class="q-mt-md" label="Due time" v-model="time" filled type="time" hint="Native time" />
+                    <q-input filled v-model="todoStore.todoForm.title" label="Title"></q-input>
+                    <q-input class="q-mt-md" label="Due time" v-model="todoStore.todoForm.dueTime" filled type="time" hint="Native time" />
                 </q-card-section>
 
                 <q-card-actions align="right">
                     <q-btn square color="secondary" no-caps v-close-popup>Cancel</q-btn>
-                    <q-btn square color="primary" no-caps>Update</q-btn>
+                    <q-btn square color="primary" no-caps @click="updateTodo" v-close-popup>Update</q-btn>
                 </q-card-actions>
 
             </q-card>
@@ -66,11 +82,10 @@
                 <q-toolbar>
                     <q-avatar icon="note_add" font-size="40px" square></q-avatar>
                     <q-toolbar-title>
-                        <span class="text-weight-bold">Add task</span> 
+                        <span class="text-weight-bold">Add task</span>  
                     </q-toolbar-title>
                     <q-btn flat round dense icon="close" v-close-popup />
                 </q-toolbar>
-
                 <q-card-section>
                     <q-input filled  label="Title" v-model="todoStore.todoForm.title"></q-input>
                     <q-input class="q-mt-md" label="Due time" v-model="todoStore.todoForm.dueTime" filled type="time" hint="Native time" />
@@ -78,7 +93,7 @@
 
                 <q-card-actions align="right">
                     <q-btn square color="secondary" no-caps v-close-popup>Cancel</q-btn>
-                    <q-btn square color="primary" no-caps @click="todoStore.insertTodo">Add</q-btn>
+                    <q-btn square color="primary" no-caps @click="addTodo()">Add</q-btn>
                 </q-card-actions>
 
             </q-card>

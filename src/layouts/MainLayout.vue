@@ -13,6 +13,28 @@
                     Essential Links
                 </q-item-label>
                 <EssentialLink v-for="link in linksList" :key="link.title" :link="link"/>
+                <a href="https://www.roblox.com/users/1362775969/profile" target="_blank"  rel="noopener noreferrer">
+                    <q-item clickable>
+                        <q-item-section avatar>
+                            <q-icon name="link" />
+                        </q-item-section>
+
+                        <q-item-section>
+                            <q-item-label>Roblox</q-item-label>
+                        </q-item-section>
+                    </q-item>
+                </a>
+                <a href="https://www.instagram.com/joren97x" target="_blank"  rel="noopener noreferrer">
+                    <q-item clickable>
+                        <q-item-section avatar>
+                            <q-icon name="link" />
+                        </q-item-section>
+
+                        <q-item-section>
+                            <q-item-label>Instagram</q-item-label>
+                        </q-item-section>
+                    </q-item>
+                </a>
             </q-list>
         </q-drawer>
 
@@ -53,3 +75,13 @@
     ]
 
 </script>
+
+
+<style scoped>
+
+    a{
+        text-decoration: none;
+        color: black;
+    }
+
+</style>

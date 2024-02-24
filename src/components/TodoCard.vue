@@ -13,7 +13,7 @@
         </q-card-section>
         <q-card-section>
             <q-list separator>
-                <q-item :class="[todo.completed ? 'bg-green-2' : 'bg-blue-1']" clickable v-ripple @click="todo.completed = !todo.completed" v-for="(todo, index) in todos" :key="todo.id">
+                <q-item :class="[todo.completed ? 'bg-green-2' : 'bg-blue-1']" clickable v-ripple @click="todo.completed = !todo.completed" v-for="todo in todos" :key="todo.id">
                     <q-checkbox v-model="todo.completed" />
                     <q-item-section :class="{'text-line' : todo.completed}">{{ todo.title }}</q-item-section>
                     <q-item-section side>
@@ -21,12 +21,12 @@
                     </q-item-section>
                     <q-item-section side>
                         <div class="row">
-                            <q-btn icon="edit" color="blue" flat @click.stop="todoStore.handleEdit(todo, index)">
+                            <q-btn icon="edit" color="blue" flat @click.stop="todoStore.handleEdit(todo)">
                                 <q-tooltip class="text-caption">
                                     Edit
                                 </q-tooltip>
                             </q-btn>
-                            <q-btn icon="delete" color="red" flat @click.stop="todoStore.handleDelete(todo, index)">
+                            <q-btn icon="delete" color="red" flat @click.stop="todoStore.handleDelete(todo)">
                                 <q-tooltip class="text-caption">
                                     Delete
                                 </q-tooltip>
