@@ -4,14 +4,17 @@ const routes = [
         path: '/',
         component: () => import('layouts/MainLayout.vue'),
         children: [
-            { path: '', component: () => import('pages/IndexPage.vue') }
+            { path: '', component: () => import('pages/IndexPage.vue') },
+            { path: '2', component: () => import('pages/Index2Page.vue') }
         ]
     },
     {
         path: '/about',
         component: () => import('layouts/MainLayout.vue'),
         children: [
-            { path: '', component: () => import('pages/AboutPage.vue') }
+            { path: '', component: () => import('pages/AboutPage.vue') },
+            { path: 'wow', component: () => import('pages/WowPage.vue') },
+            { path: 'wtf', component: () => import('pages/WtfPage.vue') }
         ]
     },
     {

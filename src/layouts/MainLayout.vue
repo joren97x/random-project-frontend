@@ -1,7 +1,8 @@
 <template>
-    <q-layout view="lHh Lpr lFf">
+    <q-layout view="hHh lpR lFf">
         <q-header elevated>
             <q-toolbar>
+                <q-btn @click="leftDrawerOpen = !leftDrawerOpen" icon="menu" flat></q-btn>
                 <q-toolbar-title> Random App </q-toolbar-title>
             </q-toolbar>
         </q-header>
@@ -30,6 +31,11 @@
     const linksList = 
     [
         {
+            title: 'Home',
+            icon: 'home',
+            link: '/'
+        },
+        {
             title: 'Todo',
             icon: 'list',
             link: '/todo'
@@ -38,7 +44,12 @@
             title: 'Settings',
             icon: 'settings',
             link: '/settings'
-        }
+        },
+        {
+            title: 'About',
+            icon: 'info',
+            link: '/about'
+        },
     ]
 
 </script>

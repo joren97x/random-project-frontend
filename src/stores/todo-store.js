@@ -18,7 +18,12 @@ export const useTodoStore = defineStore('todo', {
         ]
     }),
     getters: {
-        
+        getTodos: (state) => {
+            return state.todos.filter(todo => todo.completed === false)
+        },
+        getCompleted: (state) => {
+            return state.todos.filter(todo => todo.completed === true)
+        }
     },
     actions: {
         
