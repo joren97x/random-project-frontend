@@ -1,24 +1,19 @@
-# Quasar App (quasar-todo)
-
-A Quasar Project
+# A Quasar Project
 
 ## Install the dependencies
 ```bash
-yarn
-# or
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+### Start the app in web
 ```bash
 quasar dev
 ```
 
-
-### Build the app for production
+### Start the app in desktop mode
 ```bash
-quasar build
+quasar dev -m electron
 ```
 
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+### still learning how to run the app in mobile :/
+
