@@ -1,7 +1,6 @@
 <script setup>
 
     import { ref, reactive, onMounted } from 'vue'
-    import { api } from 'src/boot/axios'
     import { useAuthStore } from '../../stores/auth-store.js'
 
     const authStore = useAuthStore()
@@ -26,12 +25,12 @@
         submitLoading.value = true
         await authStore.login(loginForm)
         submitLoading.value = false
-        authStore.fetchAuth()
-
     }
 
-    const submitRegisterForm = () => {
-        alert('register the user bruh')
+    const submitRegisterForm = async () => {
+        submitLoading.value = true
+        await authStore.register(registerForm)
+        submitLoading.value = false
     }
 
 </script>
@@ -51,14 +50,20 @@
                     <div class="row">
                         <div class="col q-mr-xl">
                             <div class="text-h6 q-mb-sm">Login to continue</div>
+                            <q-banner dense class="bg-red-5 q-mb-sm" v-if="authStore.loginError.server">
+                                <template v-slot:avatar>
+                                    <q-icon name="error" />
+                                </template>
+                                    {{ authStore.loginError.server }}
+                            </q-banner>
                             <q-form @submit="submitLoginForm">
                                 <q-input
                                     filled
                                     v-model="loginForm.email"
                                     label="Email"
                                     lazy-rules
-                                    :error-message="authStore.error?.message"
-                                    :error="authStore.error?.message ? true : false"
+                                    :error-message="authStore.loginError?.message"
+                                    :error="authStore.loginError?.message ? true : false"
                                     :rules="[ val => val && val.length > 0 || 'Please type something']"
                                 />
 
@@ -108,12 +113,20 @@
                         </div>
                         <div class="col">
                             <div class="text-h6 q-mb-sm">Register account</div>
+                            <q-banner dense class="bg-red-5 q-mb-sm" v-if="authStore.registerError.server">
+                                <template v-slot:avatar>
+                                    <q-icon name="error" />
+                                </template>
+                                    {{ authStore.registerError.server }}
+                            </q-banner>
                             <q-form @submit="submitRegisterForm">
                                 <q-input
                                     filled
                                     v-model="registerForm.email"
                                     label="Email"
                                     lazy-rules
+                                    :error-message="authStore.registerError?.email"
+                                    :error="authStore.registerError?.email ? true : false"
                                     :rules="[ val => val && val.length > 0 || 'Please type something']"
                                 />
 
@@ -122,6 +135,8 @@
                                     v-model="registerForm.name"
                                     label="Name"
                                     lazy-rules
+                                    :error-message="authStore.registerError?.name"
+                                    :error="authStore.registerError?.name ? true : false"
                                     :rules="[ val => val && val.length > 0 || 'Please input your name bruh']"
                                 />
 
@@ -139,7 +154,7 @@
 
                                 <div align="end" class="row">
                                     <div class="col">
-                                        <q-btn label="Submit" type="submit" color="primary"/>
+                                        <q-btn label="Submit" type="submit" color="primary" :loading="submitLoading" />
                                     </div>
                                 </div>
                             </q-form>

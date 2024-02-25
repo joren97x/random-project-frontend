@@ -1,3 +1,41 @@
+<script setup>
+
+    import { ref } from 'vue'
+    import EssentialLink from 'src/components/EssentialLink.vue'
+
+    const leftDrawerOpen = ref(false)
+    const linksList = 
+    [
+        {
+            title: 'Home',
+            icon: 'home',
+            link: '/'
+        },
+        {
+            title: 'Todo',
+            icon: 'list',
+            link: '/todo'
+        },
+        {
+            title: 'Chat app',
+            icon: 'chat',
+            link: '/chat'
+        },
+        {
+            title: 'Settings',
+            icon: 'settings',
+            link: '/settings'
+        },
+        {
+            title: 'About',
+            icon: 'info',
+            link: '/about'
+        },
+    ]
+
+</script>
+
+
 <template>
     <q-layout view="hHh lpR lFf">
         <q-header elevated>
@@ -44,38 +82,6 @@
         </q-page-container>
     </q-layout>
 </template>
-
-<script setup>
-
-    import { ref } from 'vue'
-    import EssentialLink from 'src/components/EssentialLink.vue'
-
-    const leftDrawerOpen = ref(true)
-    const linksList = 
-    [
-        {
-            title: 'Home',
-            icon: 'home',
-            link: '/'
-        },
-        {
-            title: 'Todo',
-            icon: 'list',
-            link: '/todo'
-        },
-        {
-            title: 'Settings',
-            icon: 'settings',
-            link: '/settings'
-        },
-        {
-            title: 'About',
-            icon: 'info',
-            link: '/about'
-        },
-    ]
-
-</script>
 
 
 <style scoped>

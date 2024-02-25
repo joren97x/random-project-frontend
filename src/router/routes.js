@@ -22,6 +22,13 @@ const routes = [
         ]
     },
     {
+        path: '/chat',
+        component: () => import('layouts/MainLayout.vue'),
+        children: [
+            { path: '', component: () => import('src/pages/authenticated/ChatPage.vue') }
+        ]
+    },
+    {
         path: '/settings',
         component: () => import('layouts/MainLayout.vue'),
         children: [
