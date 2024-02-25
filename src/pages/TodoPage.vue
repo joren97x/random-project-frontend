@@ -70,7 +70,7 @@
                 </q-card-section>
 
                 <q-card-actions align="right">
-                    <q-btn square color="secondary" no-caps v-close-popup>Cancel</q-btn>
+                    <q-btn square color="secondary" no-caps @click="todoStore.closeEditDialog">Cancel</q-btn>
                     <q-btn square color="primary" no-caps @click="updateTodo" v-close-popup>Update</q-btn>
                 </q-card-actions>
 

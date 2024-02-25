@@ -35,6 +35,7 @@
                         </q-item-section>
                     </q-item>
                 </a>
+                <q-btn to="/login">Logout</q-btn>
             </q-list>
         </q-drawer>
 

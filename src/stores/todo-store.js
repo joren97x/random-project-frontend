@@ -60,6 +60,7 @@ export const useTodoStore = defineStore('todo', {
         updateTodo() {
             const todoIndex = this.todos.findIndex(todo => todo.id === this.todoForm.id)
             this.todos[todoIndex] = {...this.todoForm}
+            this.resetForm()
         },
         resetForm() {
             this.todoForm.id = null
@@ -75,9 +76,9 @@ export const useTodoStore = defineStore('todo', {
             this.todoForm = {...todo}
             this.editDialog = true
         },
-        closeDialog() {
+        closeEditDialog() {
             this.editDialog = false
-            this.deleteDialog = false
+            this.resetForm()
         }
     },
 })

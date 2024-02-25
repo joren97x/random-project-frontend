@@ -1,8 +1,5 @@
 <script setup>
 
-    import { ref } from 'vue'
-
-
 
 </script>
 
@@ -16,15 +13,8 @@
                 </q-toolbar-title>
 
                 <div>Quasar v{{ $q.version }}</div>
-                <router-link to="/">
-                    <q-btn>Home</q-btn>
-                </router-link>
-                <router-link to="/login">
-                    <q-btn>Login</q-btn>
-                </router-link>
-                <router-link to="/register">
-                    <q-btn>Register</q-btn>
-                </router-link>
+                    <q-btn to="/">Home</q-btn>
+                    <q-btn to="/login">Login</q-btn>
             </q-toolbar>
         </q-header>
 
