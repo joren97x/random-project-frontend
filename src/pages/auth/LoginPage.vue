@@ -1,21 +1,33 @@
 <script setup>
 
-    import { ref, reactive } from 'vue'
+    import { ref, reactive, onMounted } from 'vue'
+    import { api } from 'src/boot/axios'
+    import { useAuthStore } from '../../stores/auth-store.js'
 
+    const authStore = useAuthStore()
     const tab = ref('login')
+    const submitLoading = ref(false)
     const loginForm = reactive({
-        username: null,
+        email: null,
         password: null
     })
 
     const registerForm = reactive({
-        username: null,
+        email: null,
         name: null,
         password: null
     })
 
-    const submitLoginForm = () => {
-        alert('login the user cuhh')
+    onMounted(async () => {
+        authStore.fetchAuth()
+    })
+
+    const submitLoginForm = async () => {
+        submitLoading.value = true
+        await authStore.login(loginForm)
+        submitLoading.value = false
+        authStore.fetchAuth()
+
     }
 
     const submitRegisterForm = () => {
@@ -27,24 +39,26 @@
 
 <template>
     <q-page class="q-ma-xl">
+        {{ authStore.getAuth }}
         <q-card>
             <q-tabs v-model="tab" active-bg-color="primary" align="justify" narrow-indicator>
                 <q-tab name="login" label="Login" />
                 <q-tab name="register" label="Register" />
             </q-tabs>
             <q-separator />
-
             <q-tab-panels v-model="tab" animated>
                 <q-tab-panel name="login">
                     <div class="row">
-                        <div class="col q-mr-lg">
+                        <div class="col q-mr-xl">
                             <div class="text-h6 q-mb-sm">Login to continue</div>
                             <q-form @submit="submitLoginForm">
                                 <q-input
                                     filled
-                                    v-model="loginForm.username"
-                                    label="Username"
+                                    v-model="loginForm.email"
+                                    label="Email"
                                     lazy-rules
+                                    :error-message="authStore.error?.message"
+                                    :error="authStore.error?.message ? true : false"
                                     :rules="[ val => val && val.length > 0 || 'Please type something']"
                                 />
 
@@ -62,7 +76,7 @@
 
                                 <div align="end" class="row">
                                     <div class="col">
-                                        <q-btn label="Submit" type="submit" color="primary"/>
+                                        <q-btn label="Submit" type="submit" :loading="submitLoading" color="primary"/>
                                     </div>
                                 </div>
                             </q-form>
@@ -97,8 +111,8 @@
                             <q-form @submit="submitRegisterForm">
                                 <q-input
                                     filled
-                                    v-model="registerForm.username"
-                                    label="Username"
+                                    v-model="registerForm.email"
+                                    label="Email"
                                     lazy-rules
                                     :rules="[ val => val && val.length > 0 || 'Please type something']"
                                 />
