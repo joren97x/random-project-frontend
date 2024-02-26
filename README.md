@@ -1,6 +1,6 @@
 # A Quasar Project
 
-https://quasar-project-4ktkpk721-jorens-projects-e792a21c.vercel.app
+  i be putting random ahh projects in this project
 
 ## Install the dependencies
 ```bash
