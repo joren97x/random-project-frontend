@@ -1,7 +1,9 @@
 # A Quasar Project
 
   i be putting random ahh projects in this project
+![111aaa](https://github.com/joren97x/random-project-frontend/assets/112835241/0bb5941b-984e-4cd3-a751-6fe55e154a14)
 
+## setup
 ## Install the dependencies
 ```bash
 npm install
