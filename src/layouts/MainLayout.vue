@@ -68,7 +68,7 @@
                 <q-card square flat>
                     <q-img src="https://cdn.quasar.dev/img/mountains.jpg" height="130px">
                         <div class="absolute-bottom text-h6">
-                            {{authStore.auth.name}}
+                            {{authStore.auth?.name}}
                         </div>
                     </q-img>
                 </q-card>

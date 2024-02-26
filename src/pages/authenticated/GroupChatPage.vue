@@ -1,8 +1,16 @@
 <script setup>
 
-    import { ref } from 'vue'
+    import { useAuthStore } from 'src/stores/auth-store.js'
+    import { ref, onMounted } from 'vue'
+    import { useGroupchatStore } from 'src/stores/group-chat-store.js'
+    import { formatDistanceToNow } from 'date-fns'
 
-    const text = ref('')
+    const authStore = useAuthStore()
+    const groupchatStore = useGroupchatStore()
+
+    onMounted(() => {
+        groupchatStore.getMessages()
+    })
 
 </script>
 
@@ -30,18 +38,29 @@
                 </q-tooltip>
             </q-btn>
         </q-toolbar>
-
-        <q-scroll-area style="height: 72vh; max-width: 100vw;" class="q-px-lg q-py-sm">
+        <!-- <q-scroll-area style="height: 72vh; max-width: 100vw;" class="q-px-lg q-py-sm">
             <q-chat-message bg-color="primary" stamp="4 hours ago" name="Me" :text="['Hello mga ferson']" sent></q-chat-message>
             <q-chat-message bg-color="secondary" stamp="3 hours ago" name="Brent Faiyaz" :text="[`boom shi boom imo lobot lagom🥺🥀`]"/>
             <q-chat-message bg-color="secondary" stamp="2 hours ago" name="Daniel Caesar" :text="['Daniel Caesar unsint a message.', 'Daniel Caesar unsint a message.']"></q-chat-message>
             <q-chat-message bg-color="secondary" stamp="40 minutes ago" name="skibidi toilet cameraman" size="9" :text="['forda skibidi hi mga ferson i am Rizzler Gyatt M. Dela Cruz from PekPek Town', `Once again, my foolishness and impulsiveness has led me to miss an opportunity
 No time for whining, time to train for the next opportunity or focus on your other goals for the mean time`]"></q-chat-message>
             <q-chat-message bg-color="primary" sent name="Me" :text="['what is bro yappin about']" stamp="2 minutes ago"/>
+        </q-scroll-area> -->
+        <q-scroll-area style="height: 72vh; max-width: 100vw;" class="q-px-lg q-py-sm">
+            <q-chat-message 
+                v-for="message in groupchatStore.messages" 
+                :key="message.id"
+                :bg-color="message.user.id === authStore.auth.id ? 'primary' : 'secondary'"
+                :stamp="formatDistanceToNow(message.created_at)"
+                :name="message.user.id === authStore.auth.id ? 'Me' : message.user.name"
+                :text="[message.message]"
+                :sent="message.user.id === authStore.auth.id ? true : false"
+            >
+            </q-chat-message>
         </q-scroll-area>
 
         <q-card-actions align="left">
-            <q-input filled class="" style="width: 100%;" dense v-model="text" autogrow label="Aa">
+            <q-input filled class="" style="width: 100%;" dense v-model="groupchatStore.message" autogrow label="Aa">
                 <template v-slot:before>
                     <q-btn size="md" round icon="add_circle" flat color="blue">
                         <q-tooltip anchor="top middle" self="center middle">
@@ -60,7 +79,7 @@ No time for whining, time to train for the next opportunity or focus on your oth
                     </q-btn>
                 </template>
                 <template v-slot:after>
-                    <q-btn icon="send" round size="md" flat color="blue">
+                    <q-btn icon="send" round size="md" flat color="blue" @click="groupchatStore.sendMessage()" :loading="sendMessageBtn">
                         <q-tooltip anchor="top middle" self="center middle">
                             Press enter to send a message
                         </q-tooltip>

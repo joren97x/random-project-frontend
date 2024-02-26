@@ -38,7 +38,6 @@
 
 <template>
     <q-page class="q-ma-xl">
-        {{ authStore.getAuth }}
         <q-card>
             <q-tabs v-model="tab" active-bg-color="primary" align="justify" narrow-indicator>
                 <q-tab name="login" label="Login" />
