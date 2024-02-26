@@ -33,12 +33,11 @@
 
         <q-scroll-area style="height: 72vh; max-width: 100vw;" class="q-px-lg q-py-sm">
             <q-chat-message bg-color="primary" stamp="4 hours ago" name="Me" :text="['Hello mga ferson']" sent></q-chat-message>
-            <q-chat-message bg-color="secondary" stamp="3 hours ago" name="Brent Faiyaz" :text="[`boom shi boom imo lobot lagom`]"/>
-            <q-chat-message bg-color="secondary" stamp="3 hours ago" name="Daniel Caesar" :text="['🥺🥀']"></q-chat-message>
+            <q-chat-message bg-color="secondary" stamp="3 hours ago" name="Brent Faiyaz" :text="[`boom shi boom imo lobot lagom🥺🥀`]"/>
             <q-chat-message bg-color="secondary" stamp="2 hours ago" name="Daniel Caesar" :text="['Daniel Caesar unsint a message.', 'Daniel Caesar unsint a message.']"></q-chat-message>
-            <q-chat-message bg-color="primary" sent name="Me" size="9" :text="[`imagine nasa elevator ka habang nakikinig sa new jeans tapos may katabi kang babae tapos sinabi na
-i love new jeans tapos sabi mo what?? tapos sabi niya i said, I love new jeans tapos bigla siyang kumanta im super shy super shy but wait a minute while i make u mine make u mine ackkkkkk❤️🐻`, 'what is bro yappin about']" stamp="52 minutes ago"/>
-            <q-chat-message bg-color="secondary" stamp="40 minutes ago" name="Daniel Caesar" :text="['Ooohhh you got powerss, superpowerss']"></q-chat-message>
+            <q-chat-message bg-color="secondary" stamp="40 minutes ago" name="skibidi toilet cameraman" size="9" :text="['forda skibidi hi mga ferson i am Rizzler Gyatt M. Dela Cruz from PekPek Town', `Once again, my foolishness and impulsiveness has led me to miss an opportunity
+No time for whining, time to train for the next opportunity or focus on your other goals for the mean time`]"></q-chat-message>
+            <q-chat-message bg-color="primary" sent name="Me" :text="['what is bro yappin about']" stamp="2 minutes ago"/>
         </q-scroll-area>
 
         <q-card-actions align="left">
