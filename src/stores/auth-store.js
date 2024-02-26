@@ -3,7 +3,7 @@ import { api } from "src/boot/axios"
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
-        auth: null,
+        auth: JSON.parse(localStorage.getItem('auth')),
         loginError: {
             message: null,
             server: null
@@ -17,6 +17,9 @@ export const useAuthStore = defineStore('auth', {
     getters: {
         getAuth: (state) => {
             return state.auth
+        },
+        isAuthenticated: (state) => {
+            return state.auth
         }
     },
     actions: {
@@ -24,7 +27,9 @@ export const useAuthStore = defineStore('auth', {
             try {
                 await api.post('/authenticate', credentials)
                 .then((response) => {
+                    console.log(response.data)
                     this.auth = response.data.user
+                    localStorage.setItem('auth', JSON.stringify(response.data.user))
                     this.loginError = null
                 })
             }
@@ -45,6 +50,7 @@ export const useAuthStore = defineStore('auth', {
                 await api.post('/register', credentials)
                 .then((response) => {
                     this.auth = response.data.user
+                    localStorage.setItem('auth', JSON.stringify(response.data.user))
                     this.registerError = null
                 })
             }
@@ -61,6 +67,10 @@ export const useAuthStore = defineStore('auth', {
                     this.registerError.server = 'An unexpected error occurred. Please try again later.'
                 }
             }
+        },
+        logout() {
+            localStorage.removeItem('auth')
+            this.auth = JSON.parse(localStorage.getItem('auth'))
         },
         async fetchAuth() {
             try {

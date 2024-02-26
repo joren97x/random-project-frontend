@@ -1,8 +1,10 @@
 <script setup>
 
-    import { ref, reactive, onMounted } from 'vue'
+    import { ref, reactive } from 'vue'
+    import { useRouter } from 'vue-router'
     import { useAuthStore } from '../../stores/auth-store.js'
 
+    const router = useRouter()
     const authStore = useAuthStore()
     const tab = ref('login')
     const submitLoading = ref(false)
@@ -17,20 +19,18 @@
         password: null
     })
 
-    onMounted(async () => {
-        authStore.fetchAuth()
-    })
-
     const submitLoginForm = async () => {
         submitLoading.value = true
         await authStore.login(loginForm)
         submitLoading.value = false
+        router.push('/')
     }
 
     const submitRegisterForm = async () => {
         submitLoading.value = true
         await authStore.register(registerForm)
         submitLoading.value = false
+        router.push('/')
     }
 
 </script>
@@ -50,11 +50,11 @@
                     <div class="row">
                         <div class="col q-mr-xl">
                             <div class="text-h6 q-mb-sm">Login to continue</div>
-                            <q-banner dense class="bg-red-5 q-mb-sm" v-if="authStore.loginError.server">
+                            <q-banner dense class="bg-red-5 q-mb-sm" v-if="authStore.loginError?.server">
                                 <template v-slot:avatar>
                                     <q-icon name="error" />
                                 </template>
-                                    {{ authStore.loginError.server }}
+                                    {{ authStore.loginError?.server }}
                             </q-banner>
                             <q-form @submit="submitLoginForm">
                                 <q-input
@@ -113,11 +113,11 @@
                         </div>
                         <div class="col">
                             <div class="text-h6 q-mb-sm">Register account</div>
-                            <q-banner dense class="bg-red-5 q-mb-sm" v-if="authStore.registerError.server">
+                            <q-banner dense class="bg-red-5 q-mb-sm" v-if="authStore.registerError?.server">
                                 <template v-slot:avatar>
                                     <q-icon name="error" />
                                 </template>
-                                    {{ authStore.registerError.server }}
+                                    {{ authStore.registerError?.server }}
                             </q-banner>
                             <q-form @submit="submitRegisterForm">
                                 <q-input

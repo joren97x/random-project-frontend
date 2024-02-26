@@ -3,8 +3,9 @@
     import { ref } from 'vue'
 
     const check1 = ref(false)
-    const check2 = ref(false)
+    const check2 = ref(true)
     const check3 = ref(false)
+    const check4 = ref(false)
 
 </script>
 
@@ -19,8 +20,7 @@
                     <q-checkbox v-model="check1" />
                 </q-item-section>
                 <q-item-section>
-                    <q-item-label>Ugma</q-item-label>
-                    <q-item-label caption>
+                    <q-item-label>
                         Add more features or projects
                     </q-item-label>
                 </q-item-section>
@@ -35,10 +35,10 @@
             </q-item>
             <q-item tag="label" v-ripple>
                 <q-item-section side top>
-                    <q-checkbox v-model="check3" />
+                    <q-checkbox v-model="check4" />
                 </q-item-section>
                 <q-item-section>
-                    <q-item-label>Run the app in mobile version</q-item-label>
+                    <q-item-label>Buhata ang login ug register</q-item-label>
                 </q-item-section>
             </q-item>
             <q-item tag="label" v-ripple>

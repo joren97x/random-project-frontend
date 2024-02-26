@@ -2,7 +2,9 @@
 
     import { ref } from 'vue'
     import EssentialLink from 'src/components/EssentialLink.vue'
+    import { useAuthStore } from 'src/stores/auth-store'
 
+    const authStore = useAuthStore()
     const leftDrawerOpen = ref(false)
     const linksList = 
     [
@@ -17,9 +19,14 @@
             link: '/todo'
         },
         {
-            title: 'Chat app',
+            title: '1:1 Chat',
             icon: 'chat',
             link: '/chat'
+        },
+        {
+            title: 'Group chat',
+            icon: 'forum',
+            link: '/group-chat'
         },
         {
             title: 'Settings',
@@ -31,7 +38,18 @@
             icon: 'info',
             link: '/about'
         },
+        
     ]
+
+    const logoutLink = {
+        title: 'Logout',
+        icon: 'logout',
+        link: '/login'
+    }
+
+    function logout() {
+        authStore.logout()
+    }
 
 </script>
 
@@ -47,34 +65,21 @@
 
         <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
             <q-list>
+                <q-card square flat>
+                    <q-img src="https://cdn.quasar.dev/img/mountains.jpg" height="130px">
+                        <div class="absolute-bottom text-h6">
+                            {{authStore.auth.name}}
+                        </div>
+                    </q-img>
+                </q-card>
                 <q-item-label header>
                     Essential Links
                 </q-item-label>
+                <q-separator></q-separator>
                 <EssentialLink v-for="link in linksList" :key="link.title" :link="link"/>
-                <a href="https://www.roblox.com/users/1362775969/profile" target="_blank"  rel="noopener noreferrer">
-                    <q-item clickable>
-                        <q-item-section avatar>
-                            <q-icon name="link" />
-                        </q-item-section>
-
-                        <q-item-section>
-                            <q-item-label>Roblox</q-item-label>
-                        </q-item-section>
-                    </q-item>
-                </a>
-                <a href="https://www.instagram.com/joren97x" target="_blank"  rel="noopener noreferrer">
-                    <q-item clickable>
-                        <q-item-section avatar>
-                            <q-icon name="link" />
-                        </q-item-section>
-
-                        <q-item-section>
-                            <q-item-label>Instagram</q-item-label>
-                        </q-item-section>
-                    </q-item>
-                </a>
-                <q-btn to="/login">Logout</q-btn>
+                <EssentialLink @click="logout()" :link="logoutLink" />
             </q-list>
+           
         </q-drawer>
 
         <q-page-container>
